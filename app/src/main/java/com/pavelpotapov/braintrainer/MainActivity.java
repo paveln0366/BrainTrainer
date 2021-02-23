@@ -56,15 +56,28 @@ public class MainActivity extends AppCompatActivity {
 
         playNext();
 
-        CountDownTimer timer = new CountDownTimer(6000, 1000) {
+        CountDownTimer timer = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 textViewTimer.setText(getTime(millisUntilFinished));
+
+                if (millisUntilFinished < 20000) {
+                    textViewTimer.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
+                }
+
+                if (millisUntilFinished < 10000) {
+                    textViewTimer.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                }
             }
 
             @Override
             public void onFinish() {
                 gameOver = true;
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                int max = preferences.getInt("max", 0);
+                if (countOfRightAnswers >= max) {
+                    preferences.edit().putInt("max", countOfRightAnswers).apply();
+                }
                 Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
                 intent.putExtra("result", countOfRightAnswers);
                 startActivity(intent);

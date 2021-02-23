@@ -10,18 +10,24 @@
         android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        tools:text="Result"
+        android:textSize="@dimen/text_size_standard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <TextView
         android:id="@+id/buttonStartNewGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/try_again"
+        android:padding="@dimen/padding_standard"
+        android:textColor="@color/white"
+        android:background="@android:color/holo_green_light"
         android:onClick="onClickStartNewGame"
+        android:textSize="@dimen/text_size_standard"
+        android:layout_marginTop="@dimen/margin_top_standard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewResult" />

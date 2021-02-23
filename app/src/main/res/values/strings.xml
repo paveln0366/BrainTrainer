@@ -3,4 +3,6 @@
     <string name="answer_right">Right</string>
     <string name="answer_wrong">Wrong</string>
     <string name="try_again">Try again</string>
+    <string name="your_result">Your result</string>
+    <string name="maximum_result">Maximum result</string>
 </resources>

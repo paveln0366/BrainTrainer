@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Тренажер для мозга</string>
+    <string name="answer_right">Верно</string>
+    <string name="answer_wrong">Неверно</string>
+    <string name="try_again">Попробовать заново</string>
+    <string name="your_result">Ваш результат</string>
+    <string name="maximum_result">Максимальный результат</string>
+</resources>
