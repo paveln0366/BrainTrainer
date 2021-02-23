@@ -17,6 +17,7 @@
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_opinion"
+        android:onClick="onClickOpinion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textViewOpinion3"
         app:layout_constraintStart_toStartOf="parent" />
@@ -31,6 +32,7 @@
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_opinion"
+        android:onClick="onClickOpinion"
         app:layout_constraintBottom_toTopOf="@+id/textViewOpinion2"
         app:layout_constraintEnd_toStartOf="@+id/textViewOpinion1"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,6 +47,7 @@
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_opinion"
+        android:onClick="onClickOpinion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textViewOpinion2" />
@@ -59,6 +62,7 @@
         android:text="TextView"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_opinion"
+        android:onClick="onClickOpinion"
         app:layout_constraintBottom_toTopOf="@+id/textViewOpinion3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/textViewOpinion0" />

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private int min = 5;
     private int max = 30;
 
+    private int countOfQuestions;
+    private int countOfRightAnswers;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         opinions.add(textViewOpinion2);
         opinions.add(textViewOpinion3);
 
+        playNext();
+    }
+
+    private void playNext() {
         generateQuestion();
         for (int i = 0; i < opinions.size(); i++) {
             if (i == rightAnswerPosition) {
@@ -56,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 opinions.get(i).setText(Integer.toString(generateWrongAnswer()));
             }
         }
+        String score = String.format("%s / %s", countOfRightAnswers, countOfQuestions);
+        textViewScore.setText(score);
     }
 
     private void generateQuestion() {
@@ -81,5 +91,19 @@ public class MainActivity extends AppCompatActivity {
              result = (int) (Math.random() * max * 2 + 1) - (max - min); // -25..35
         } while (result == rightAnswer);
         return result;
+    }
+
+    public void onClickOpinion(View view) {
+        TextView textView = (TextView) view;
+        String answer = textView.getText().toString();
+        int chosenAnswer = Integer.parseInt(answer);
+        if (chosenAnswer == rightAnswer) {
+            countOfRightAnswers++;
+            Toast.makeText(this, getString(R.string.answer_right), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, getString(R.string.answer_wrong), Toast.LENGTH_SHORT).show();
+        }
+        countOfQuestions++;
+        playNext();
     }
 }
