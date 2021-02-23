@@ -2,6 +2,7 @@ package com.pavelpotapov.braintrainer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean isPositive;
     private int min = 5;
     private int max = 30;
-
     private int countOfQuestions;
     private int countOfRightAnswers;
+    private boolean gameOver = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,22 @@ public class MainActivity extends AppCompatActivity {
         opinions.add(textViewOpinion3);
 
         playNext();
+
+        CountDownTimer timer = new CountDownTimer(6000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                textViewTimer.setText(getTime(millisUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+                gameOver = true;
+                Intent intent = new Intent(MainActivity.this, ScoreActivity.class);
+                intent.putExtra("result", countOfRightAnswers);
+                startActivity(intent);
+            }
+        };
+        timer.start();
     }
 
     private void playNext() {
@@ -93,17 +111,26 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
+    private String getTime(long millis) {
+        int seconds = (int) (millis / 1000);
+        int minutes = seconds / 60;
+        seconds = seconds % 60;
+        return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+    }
+
     public void onClickOpinion(View view) {
-        TextView textView = (TextView) view;
-        String answer = textView.getText().toString();
-        int chosenAnswer = Integer.parseInt(answer);
-        if (chosenAnswer == rightAnswer) {
-            countOfRightAnswers++;
-            Toast.makeText(this, getString(R.string.answer_right), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, getString(R.string.answer_wrong), Toast.LENGTH_SHORT).show();
+        if (!gameOver) {
+            TextView textView = (TextView) view;
+            String answer = textView.getText().toString();
+            int chosenAnswer = Integer.parseInt(answer);
+            if (chosenAnswer == rightAnswer) {
+                countOfRightAnswers++;
+                Toast.makeText(this, getString(R.string.answer_right), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, getString(R.string.answer_wrong), Toast.LENGTH_SHORT).show();
+            }
+            countOfQuestions++;
+            playNext();
         }
-        countOfQuestions++;
-        playNext();
     }
 }

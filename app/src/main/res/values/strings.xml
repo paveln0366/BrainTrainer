@@ -2,4 +2,5 @@
     <string name="app_name">Brain Trainer</string>
     <string name="answer_right">Right</string>
     <string name="answer_wrong">Wrong</string>
+    <string name="try_again">Try again</string>
 </resources>
